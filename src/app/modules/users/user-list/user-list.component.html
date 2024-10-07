@@ -1,0 +1,20 @@
+<div class="user-container">
+    <div>
+        <header>
+            <div class="user-table-header">
+            @for (col of usersColumnsHeader; track $index) {
+                <div class="user-table-column">{{col}}</div>
+                }
+            </div>
+        </header>
+        @for (user of users; track $index) {
+        <div class="user-table-row">
+            <div class="user-table-column">{{user.id}}</div>
+            <div class="user-table-column">{{user.name}}</div>
+            <div class="user-table-column">{{user.email}}</div>
+            <div class="user-table-column">{{user.roles}}</div>
+            <div class="user-table-column">{{user.status}}</div>
+        </div>
+        }
+    </div>
+</div>

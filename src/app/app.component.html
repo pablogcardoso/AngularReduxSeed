@@ -1,0 +1,18 @@
+<div class="app-container">
+  @if(!isLogged) {
+  <aside class="app-left-menu app-left-menu">
+    <div class="app-left-menu-header">
+    </div>
+    <a routerLink="/users" routerLinkActive="active" ariaCurrentWhenActive="page">Users</a>
+    <a routerLink="/roles" routerLinkActive="active" ariaCurrentWhenActive="page">Permisos</a>
+  </aside>
+  }
+  <div class="app-central-content">
+    @if(isLogged) {
+    <div class="app-toolbar"></div>
+    }
+    <div class="app-routes">
+      <router-outlet />
+    </div>
+  </div>
+</div>

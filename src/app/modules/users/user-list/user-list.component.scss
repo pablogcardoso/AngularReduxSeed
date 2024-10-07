@@ -1,0 +1,25 @@
+.user-container {
+    padding:10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    .user-table-row{
+        display: flex;
+        flex-direction: row;
+        gap:20px
+    }
+    .user-table-header{
+        display: flex;
+        flex-direction: row;
+        gap:20px;
+        font-weight: 700;
+    }
+    .user-table-column{
+        width: 100px;
+        display: inline-block;
+        justify-content: center;
+        text-align: center;
+    }
+}

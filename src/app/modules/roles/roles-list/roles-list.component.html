@@ -1,0 +1,19 @@
+<div class="roles-container">
+    <div>
+        <header>
+            <div class="roles-table-header">
+            @for (col of rolesColumnsHeader; track $index) {
+                <div class="roles-table-column">{{col}}</div>
+                }
+            </div>
+        </header>
+        @for (role of roles; track $index) {
+        <div class="roles-table-row">
+            <div class="roles-table-column">{{role.id}}</div>
+            <div class="roles-table-column">{{role.name}}</div>
+            <div class="roles-table-column">{{role.permission}}</div>
+            <div class="roles-table-column">{{role.status}}</div>
+        </div>
+        }
+    </div>
+</div>
