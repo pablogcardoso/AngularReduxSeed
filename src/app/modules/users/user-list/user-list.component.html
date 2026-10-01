@@ -1,20 +1,23 @@
-<div class="user-container">
-    <div>
-        <header>
-            <div class="user-table-header">
+<div class="flex-row">
+    <header class="text-2xl font-bold mb-4">Users</header>
+    <table class="table-st">
+        <thead class="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
             @for (col of usersColumnsHeader; track $index) {
-                <div class="user-table-column">{{col}}</div>
-                }
-            </div>
-        </header>
-        @for (user of users; track $index) {
-        <div class="user-table-row">
-            <div class="user-table-column">{{user.id}}</div>
-            <div class="user-table-column">{{user.name}}</div>
-            <div class="user-table-column">{{user.email}}</div>
-            <div class="user-table-column">{{user.roles}}</div>
-            <div class="user-table-column">{{user.status}}</div>
-        </div>
-        }
-    </div>
+            <th
+                class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">
+                {{col}}</th>
+            }
+        </thead>
+        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+            @for (user of users; track $index) {
+            <tr>
+                <td>{{user.id}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.roles}}</td>
+                <td>{{user.status}}</td>
+            </tr>
+            }
+        </tbody>
+    </table>
 </div>
