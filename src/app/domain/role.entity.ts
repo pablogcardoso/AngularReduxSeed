@@ -4,7 +4,7 @@ export interface RoleState {
 }
 
 export interface RoleEntity{
-    id: string;
+    id: number;
     name: string;
     permission: string[];
     status: number;
