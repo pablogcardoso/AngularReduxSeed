@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ThemeToggleComponent } from './modules/shared/theme-toggle/theme-toggle.component';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,11 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   imports: [
     RouterOutlet,
     RouterLink,
-    RouterLinkActive],
+    RouterLinkActive,
+    ThemeToggleComponent,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'AngularRedux';

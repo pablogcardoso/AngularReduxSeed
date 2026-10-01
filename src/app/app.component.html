@@ -1,18 +1,34 @@
-<div class="app-container">
-  @if(!isLogged) {
-  <aside class="app-left-menu app-left-menu">
-    <div class="app-left-menu-header">
-    </div>
-    <a routerLink="/users" routerLinkActive="active" ariaCurrentWhenActive="page">Users</a>
-    <a routerLink="/roles" routerLinkActive="active" ariaCurrentWhenActive="page">Permisos</a>
-  </aside>
-  }
-  <div class="app-central-content">
-    @if(isLogged) {
-    <div class="app-toolbar"></div>
-    }
-    <div class="app-routes">
+<div class="flex h-screen w-screen overflow-hidden bg-background text-text">
+
+    <aside
+      class="flex w-56 flex-col gap-1 border-r border-border bg-surface p-3"
+    >
+      <div class="app-left-menu-header mb-2 px-2 py-2 text-lg font-semibold text-text">
+        AngularRedux
+      </div>
+      <a
+        routerLink="/users"
+        routerLinkActive="bg-primary text-primary-content hover:bg-primary"
+        ariaCurrentWhenActive="page"
+        class="rounded-md px-3 py-2 text-sm font-medium text-text transition-colors hover:bg-hover-bg"
+      >Users</a>
+      <a
+        routerLink="/roles"
+        routerLinkActive="bg-primary text-primary-content hover:bg-primary"
+        ariaCurrentWhenActive="page"
+        class="rounded-md px-3 py-2 text-sm font-medium text-text transition-colors hover:bg-hover-bg"
+      >Permisos</a>
+    </aside>
+  
+  <div class="flex flex-1 flex-col overflow-hidden">
+    <header
+      class="flex h-12 shrink-0 items-center justify-between border-b border-border bg-surface px-4"
+    >
+      <span class="text-sm font-semibold text-text">Dashboard</span>
+      <app-theme-toggle />
+    </header>
+    <main class="flex-1 overflow-auto p-4">
       <router-outlet />
-    </div>
+    </main>
   </div>
 </div>
