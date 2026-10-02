@@ -1,0 +1,17 @@
+<div class="flex-row">
+    <header class="text-2xl font-bold mb-4">Users by Role</header>
+
+    <div class="card-container">
+        <ng-container *ngIf="chartData$ | async as data">
+            <ngx-charts-bar-vertical
+                [results]="data"
+                [scheme]="colorScheme"
+                [xAxis]="true"
+                [yAxis]="true"
+                [showGridLines]="true"
+                [gradient]="true"
+                [view]="view">
+            </ngx-charts-bar-vertical>
+        </ng-container>
+    </div>
+</div>
