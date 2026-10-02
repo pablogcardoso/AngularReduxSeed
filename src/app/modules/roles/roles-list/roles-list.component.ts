@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RoleEntity } from '../../../domain/role.entity';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, takeUntil, Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { getRoles } from '../../../store/actions/roles.action';
+import { getRoles, removeRole } from '../../../store/actions/roles.action';
 import { selectRoles } from '../../../store/selectors/roles.selector';
+import { RoleFormComponent } from '../role-form/role-form.component';
+import { BaseModalComponent } from '../../shared/base-modal/base-modal.component';
 
 @Component({
     standalone: true,
-    imports: [],
-    selector: 'app-role',
+    imports: [CommonModule, RoleFormComponent, BaseModalComponent],
+    selector: 'app-role-list',
     templateUrl: 'roles-list.component.html',
     styleUrl: './roles-list.component.scss'
 })
@@ -19,25 +22,44 @@ export class RoleListComponent implements OnInit {
     roles: RoleEntity[] = [];
     $rolesSelector: Observable<any> = new Observable();
     subscriptions: Subscription[] = [];
+    destroy$: Subject<void> = new Subject();
 
-    constructor(private store: Store<any>) { }
+    showForm: boolean = false;
+
+    protected store = inject(Store);
 
     ngOnInit() {
-        //this line fill the role state , now you can get this state wherever you need
-        this.store.dispatch(getRoles());
+        const action = this.store.dispatch(getRoles());
 
-        //with these lines we can select part of the current state, we can uso in others part of the application
+        console.log("dispatched getRoles action: ", action);
         this.$rolesSelector = this.store.select(selectRoles);
-        this.subscriptions.push(this.$rolesSelector.subscribe((store: RoleEntity[]) => {
-            this.roles = store;
-            console.log("get roles using selector: ", this.roles);
-        }));
+        this.$rolesSelector
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((store: RoleEntity[]) => {
+                this.roles = store;
+                console.log("get roles using selector: ", this.roles);
+            });
+
     }
 
-    ngOnDestroy(): void {
-        this.subscriptions.forEach(subscription => {
-            console.log("destroy subscriptions of observables");
-            subscription.unsubscribe();
-        });
+    openForm(): void {
+        this.showForm = true;
+    }
+
+    closeForm(): void {
+        this.showForm = false;
+    }
+
+    onSaved(): void {
+        this.closeForm();
+    }
+
+    onRemove(id: number): void {
+        this.store.dispatch(removeRole({ id }));
+    }
+
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }

@@ -1,8 +1,11 @@
-<section class="card-container">
+
         <form [formGroup]="formRole" class="flex">
             <div class="mr-2">
                 <label for="name">Name</label>
                 <input id="name" formControlName="name" type="text" class="input-field" />
+                @if (formRole.get('name')?.invalid && (formRole.get('name')?.dirty || formRole.get('name')?.touched)) {
+                    <p class="mt-1 text-xs text-red-600 dark:text-red-400">Name is required.</p>
+                }
             </div>
             <div class="mr-2">
                 <label for="permission">Permission</label>
@@ -12,10 +15,11 @@
                 <button
                     type="button"
                     (click)="onAdd()"
-                    class="button-action"
+                    [disabled]="formRole.invalid"
+                    class="button-action disabled:cursor-not-allowed disabled:opacity-50"
                 >
                     Add
                 </button>
             </div>
         </form>
-    </section>
+
