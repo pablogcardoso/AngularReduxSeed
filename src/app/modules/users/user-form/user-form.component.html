@@ -1,0 +1,37 @@
+<form [formGroup]="formUser" class="flex">
+    <div class="mr-2">
+        <label for="name">Name</label>
+        <input id="name" formControlName="name" type="text" class="input-field" />
+        @if (formUser.get('name')?.invalid && (formUser.get('name')?.dirty || formUser.get('name')?.touched)) {
+            <p class="mt-1 text-xs text-red-600 dark:text-red-400">Name is required.</p>
+        }
+    </div>
+        <div class="mr-2">
+            <label for="email">Email</label>
+            <input id="email" formControlName="email" type="email" class="input-field" />
+            @if (formUser.get('email')?.invalid && (formUser.get('email')?.dirty || formUser.get('email')?.touched)) {
+                <p class="mt-1 text-xs text-red-600 dark:text-red-400">Email is required and must be valid.</p>
+            }
+        </div>
+        <div class="mr-2">
+            <label for="permission">Rol</label>
+            <select formControlName="rol" class="input-field">
+               @for (item of roles; track $index) {
+                   <option [value]="item.id">{{ item.name }}</option>
+               }
+            </select>
+            @if (formUser.get('rol')?.invalid && (formUser.get('rol')?.dirty || formUser.get('rol')?.touched)) {
+                <p class="mt-1 text-xs text-red-600 dark:text-red-400">Rol is required.</p>
+            }
+        </div>
+    <div class="pt-6">
+        <button
+            type="button"
+            (click)="onAdd()"
+            [disabled]="formUser.invalid"
+            class="button-action disabled:cursor-not-allowed disabled:opacity-50"
+        >
+            Add
+        </button>
+    </div>
+</form>

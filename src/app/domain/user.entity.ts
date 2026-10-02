@@ -1,3 +1,4 @@
+export type UserStatus = "active" | "inactive";
 export interface UserState {
     users: UserEntity[];
     user: UserEntity;
@@ -7,5 +8,5 @@ export interface UserEntity {
     name: string;
     email: string;
     roles: string[];
-    status: number;
+    status: UserStatus;
 }

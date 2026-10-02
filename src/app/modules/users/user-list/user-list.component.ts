@@ -4,11 +4,13 @@ import { Store } from '@ngrx/store';
 import { getUsers } from '../../../store/actions/user.action';
 import { Observable, Subscription } from 'rxjs';
 import { selectUsers } from '../../../store/selectors/user.selector';
+import { BaseModalComponent } from '../../shared/base-modal/base-modal.component';
+import { UserFormComponent } from '../user-form/user-form.component';
 
 @Component({
     standalone: true,
-    imports: [],
-    selector: 'user-list',
+    imports: [BaseModalComponent, UserFormComponent],
+    selector: 'app-user-list',
     templateUrl: 'user-list.component.html',
     styleUrl: './user-list.component.scss'
 })
@@ -19,7 +21,19 @@ export class UserListComponent implements OnInit, OnDestroy {
     users: UserEntity[] = [];
     $usersSelector: Observable<any> = new Observable();
     subscriptions: Subscription[] = [];
+    showForm: boolean = false;
 
+    openForm(): void {
+        this.showForm = true;
+    }
+
+    closeForm(): void {
+        this.showForm = false;
+    }
+
+    onSaved(): void {
+        this.closeForm();
+    }
     constructor(private store: Store<any>) { }
 
     ngOnInit() {

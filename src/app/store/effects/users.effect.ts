@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
 
 import { UserService } from '../../services/user.service';
-import { getUserError, getUsers, setUser, setUsers } from '../actions/user.action';
+import { getUserError, getUsers, setUsers } from '../actions/user.action';
 //import { MoviesService } from './movies.service';
 
 

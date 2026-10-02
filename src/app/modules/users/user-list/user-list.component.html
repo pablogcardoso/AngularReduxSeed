@@ -1,5 +1,14 @@
 <div class="flex-row">
     <header class="text-2xl font-bold mb-4">Users</header>
+    <section class="mb-4">
+    <button
+        type="button"
+        class="primary-button"
+        (click)="openForm()"
+    >
+        Add User
+    </button>
+    </section>
     <table class="table-st">
         <thead class="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
             @for (col of usersColumnsHeader; track $index) {
@@ -20,4 +29,9 @@
             }
         </tbody>
     </table>
+     @if (showForm) {
+        <base-modal title="New User" (closed)="closeForm()">
+            <app-user-form (saved)="onSaved()" />
+        </base-modal>
+    }
 </div>
